@@ -7,14 +7,14 @@ const Oauth = () => {
 
   function successful(res: any) {
     console.log(jwtDecode(res.credential));
-    toast({
-      title: "Account created.",
-      description: "We've created your account for you.",
-      status: "success",
-      duration: 9000,
-      isClosable: true,
-      position: "top",
-    });
+    // toast({
+    //   title: "Account created.",
+    //   description: "We've created your account for you.",
+    //   status: "success",
+    //   duration: 9000,
+    //   isClosable: true,
+    //   position: "top",
+    // });
   }
 
   function onFailure() {

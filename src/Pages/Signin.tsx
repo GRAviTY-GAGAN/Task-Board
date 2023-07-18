@@ -20,7 +20,6 @@ import {
 import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useToast } from "@chakra-ui/react";
-import { NavLink } from "react-router-dom";
 
 interface UserObjType {
   firstName: string;
@@ -29,7 +28,7 @@ interface UserObjType {
   password: string | number;
 }
 
-const Signup = () => {
+const Signin = () => {
   const clientID = import.meta.env.VITE_OauthClientID;
 
   const toast = useToast();
@@ -74,39 +73,21 @@ const Signup = () => {
           <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
             <Stack align={"center"}>
               <Heading fontSize={"4xl"} textAlign={"center"}>
-                Sign up
+                Login
               </Heading>
-              <Text fontSize={"lg"} color={"gray.600"}>
+              {/* <Text fontSize={"lg"} color={"gray.600"}>
                 to enjoy all of our cool features ✌️
-              </Text>
+              </Text> */}
             </Stack>
             <Box
+              minW={{ base: "320px", md: "400px" }}
               rounded={"lg"}
               bg={useColorModeValue("white", "gray.700")}
               boxShadow={"lg"}
               p={8}
             >
               <Stack spacing={4}>
-                <HStack>
-                  <Box>
-                    <FormControl id="firstName" isRequired>
-                      <FormLabel>First Name</FormLabel>
-                      <Input
-                        onChange={(e) => setFirstName(e.target.value)}
-                        type="text"
-                      />
-                    </FormControl>
-                  </Box>
-                  <Box>
-                    <FormControl id="lastName">
-                      <FormLabel>Last Name</FormLabel>
-                      <Input
-                        onChange={(e) => setLastName(e.target.value)}
-                        type="text"
-                      />
-                    </FormControl>
-                  </Box>
-                </HStack>
+                <HStack></HStack>
                 <FormControl id="email" isRequired>
                   <FormLabel>Email address</FormLabel>
                   <Input
@@ -156,10 +137,7 @@ const Signup = () => {
                 </Flex>
                 <Stack pt={2}>
                   <Text align={"center"}>
-                    Already a user?{" "}
-                    <Text display={"inline"} color={"blue.400"}>
-                      <NavLink to={"/signin"}>Login</NavLink>{" "}
-                    </Text>
+                    Already a user? <Link color={"blue.400"}>Login</Link>
                   </Text>
                 </Stack>
               </Stack>
@@ -171,4 +149,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Signin;
