@@ -15,19 +15,12 @@ import {
   Heading,
   Text,
   useColorModeValue,
-  Link,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useToast } from "@chakra-ui/react";
 import { NavLink } from "react-router-dom";
-
-interface UserObjType {
-  firstName: string;
-  lastName?: string;
-  email: string;
-  password: string | number;
-}
+import { UserObjSignUpType } from "../constants";
 
 const Signup = () => {
   const clientID = import.meta.env.VITE_OauthClientID;
@@ -41,7 +34,7 @@ const Signup = () => {
   const [lastName, setLastName] = useState("");
 
   function handleSignup() {
-    const userObj: UserObjType = {
+    const userObj: UserObjSignUpType = {
       firstName,
       lastName,
       email,
@@ -158,7 +151,7 @@ const Signup = () => {
                   <Text align={"center"}>
                     Already a user?{" "}
                     <Text display={"inline"} color={"blue.400"}>
-                      <NavLink to={"/signin"}>Login</NavLink>{" "}
+                      <NavLink to={"/signin"}>Login</NavLink>
                     </Text>
                   </Text>
                 </Stack>

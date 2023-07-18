@@ -15,18 +15,12 @@ import {
   Heading,
   Text,
   useColorModeValue,
-  Link,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useToast } from "@chakra-ui/react";
-
-interface UserObjType {
-  firstName: string;
-  lastName?: string;
-  email: string;
-  password: string | number;
-}
+import { UserObjType } from "../constants";
+import { NavLink } from "react-router-dom";
 
 const Signin = () => {
   const clientID = import.meta.env.VITE_OauthClientID;
@@ -36,18 +30,14 @@ const Signin = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
 
   function handleSignup() {
     const userObj: UserObjType = {
-      firstName,
-      lastName,
       email,
       password,
     };
 
-    if (firstName && email && password) {
+    if (email && password) {
       console.log(userObj);
     } else {
       toast({
@@ -137,7 +127,10 @@ const Signin = () => {
                 </Flex>
                 <Stack pt={2}>
                   <Text align={"center"}>
-                    Already a user? <Link color={"blue.400"}>Login</Link>
+                    New user?{" "}
+                    <Text display={"inline"} color={"blue.400"}>
+                      <NavLink to={"/"}>Signup</NavLink>
+                    </Text>
                   </Text>
                 </Stack>
               </Stack>
