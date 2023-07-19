@@ -42,7 +42,10 @@ const Oauth = ({ setLoading }: OauthProps) => {
         // console.log(res);
         if (res.data.msg == "User Logged In.") {
           localStorage.setItem("token", res.data.token);
-          dispatch({ type: ActionTypes.USER_AUTH, payload: res.data.token });
+          dispatch({
+            type: ActionTypes.USER_AUTH,
+            payload: { token: res.data.token, user: res.data.user },
+          });
           toast({
             title: res.data.msg,
             // description: "We've created your account for you.",

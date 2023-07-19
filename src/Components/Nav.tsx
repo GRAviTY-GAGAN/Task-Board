@@ -42,8 +42,6 @@ export default function Nav() {
 
   const user = useSelector((store: Store) => store.reducer.user);
 
-  console.log(user, "STORE");
-
   const dispatch = useDispatch();
 
   function handleLogout() {
@@ -73,7 +71,11 @@ export default function Nav() {
                 >
                   <Avatar
                     size={"sm"}
-                    src={"https://avatars.dicebear.com/api/male/username.svg"}
+                    src={
+                      user.image
+                        ? user.image
+                        : "https://avatars.dicebear.com/api/male/username.svg"
+                    }
                   />
                 </MenuButton>
                 <MenuList alignItems={"center"}>
