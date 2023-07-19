@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import "../CSS/Nav.css";
 import {
   Box,
   Flex,
@@ -10,7 +11,7 @@ import {
   MenuList,
   MenuItem,
   MenuDivider,
-  useDisclosure,
+  //   useDisclosure,
   useColorModeValue,
   Stack,
   useColorMode,
@@ -20,6 +21,7 @@ import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { ActionTypes } from "../Redux/action-types";
 import { Store } from "../Redux/store";
+import colorPic from "../assets/color-mix-pic.avif";
 
 const NavLink = ({ children }: { children: ReactNode }) => (
   <Link
@@ -41,6 +43,7 @@ export default function Nav() {
   //   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const user = useSelector((store: Store) => store.reducer.user);
+  //   console.log(user.image);
 
   const dispatch = useDispatch();
 
@@ -53,7 +56,18 @@ export default function Nav() {
     <>
       <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-          <Box>Logo</Box>
+          <Box
+            className="nav__TaskBoards"
+            backgroundImage={colorPic}
+            backgroundSize={"cover"}
+            backgroundPosition={"center"}
+            backgroundClip={"text"}
+            fontSize={"3xl"}
+            color={"transparent"}
+            fontWeight={800}
+          >
+            Task Boards
+          </Box>
 
           <Flex alignItems={"center"}>
             <Stack direction={"row"} spacing={7}>
