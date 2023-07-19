@@ -23,6 +23,8 @@ import { useToast } from "@chakra-ui/react";
 import { UserObjType } from "../constants";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { ActionTypes } from "../Redux/action-types";
 
 const Signin = () => {
   const clientID = import.meta.env.VITE_OauthClientID;
@@ -34,6 +36,7 @@ const Signin = () => {
 
   const toast = useToast();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
@@ -52,6 +55,11 @@ const Signin = () => {
         .then((res) => {
           console.log(res);
           if (res.data.msg == "success") {
+            localStorage.setItem("token", res.data.token);
+            dispatch({
+              type: ActionTypes.USER_AUTH,
+              payload: { token: res.data.token, user: res.data.user },
+            });
             toast({
               title: "User Logged In.",
               // description: "We've created your account for you.",

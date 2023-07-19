@@ -4,6 +4,8 @@ import { GoogleLogin } from "@react-oauth/google";
 import jwtDecode from "jwt-decode";
 import { useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { ActionTypes } from "../Redux/action-types";
 
 interface OauthProps {
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
@@ -12,6 +14,7 @@ interface OauthProps {
 const Oauth = ({ setLoading }: OauthProps) => {
   const toast = useToast();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   function successful(res: any) {
     setLoading(true);
@@ -39,6 +42,7 @@ const Oauth = ({ setLoading }: OauthProps) => {
         // console.log(res);
         if (res.data.msg == "User Logged In.") {
           localStorage.setItem("token", res.data.token);
+          dispatch({ type: ActionTypes.USER_AUTH, payload: res.data.token });
           toast({
             title: res.data.msg,
             // description: "We've created your account for you.",
