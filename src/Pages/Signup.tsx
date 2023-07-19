@@ -15,25 +15,35 @@ import {
   Heading,
   Text,
   useColorModeValue,
+  Spinner,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useToast } from "@chakra-ui/react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { UserObjSignUpType } from "../constants";
+import axios from "axios";
 
 const Signup = () => {
   const clientID = import.meta.env.VITE_OauthClientID;
 
+  const url =
+    import.meta.env.MODE == "development"
+      ? import.meta.env.VITE_LOCAL_URL
+      : import.meta.env.VITE_PROD_URL;
+
   const toast = useToast();
+  const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
 
   function handleSignup() {
+    setLoading(true);
     const userObj: UserObjSignUpType = {
       firstName,
       lastName,
@@ -42,7 +52,53 @@ const Signup = () => {
     };
 
     if (firstName && email && password) {
-      console.log(userObj);
+      axios
+        .post(`${url}/user/signup`, userObj)
+        .then((res) => {
+          console.log(res);
+          if (res.data.msg == "success") {
+            toast({
+              title: "Account created.",
+              description: "We've created your account for you.",
+              status: "success",
+              duration: 9000,
+              isClosable: true,
+              position: "top",
+            });
+            setTimeout(() => {
+              navigate("/home");
+            }, 1500);
+          } else {
+            toast({
+              title: res.data?.msg || "Something went wrong...",
+              // description: "We've created your account for you.",
+              status: "warning",
+              duration: 9000,
+              isClosable: true,
+              position: "top",
+            });
+
+            if (res.data?.msg === "User Already Exists.") {
+              setTimeout(() => {
+                navigate("/signin");
+              }, 1500);
+            }
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          toast({
+            title: "Something went wrong...",
+            description: "Please try again.",
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+            position: "top",
+          });
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     } else {
       toast({
         title: "Please fill all the required details.",
@@ -52,6 +108,7 @@ const Signup = () => {
         isClosable: true,
         position: "top",
       });
+      setLoading(false);
     }
   }
 
@@ -127,24 +184,40 @@ const Signup = () => {
                   </InputGroup>
                 </FormControl>
                 <Stack spacing={10} pt={2}>
-                  <Button
-                    onClick={handleSignup}
-                    loadingText="Submitting"
-                    size="lg"
-                    bg={"blue.400"}
-                    color={"white"}
-                    _hover={{
-                      bg: "blue.500",
-                    }}
-                  >
-                    Sign up
-                  </Button>
+                  {!loading ? (
+                    <Button
+                      onClick={handleSignup}
+                      loadingText="Submitting"
+                      size="lg"
+                      bg={"blue.400"}
+                      color={"white"}
+                      _hover={{
+                        bg: "blue.500",
+                      }}
+                    >
+                      Sign up
+                    </Button>
+                  ) : (
+                    <Button
+                      bg={"blue.400"}
+                      color={"white"}
+                      textAlign={"center"}
+                    >
+                      <Spinner />
+                    </Button>
+                  )}
                 </Stack>
                 <Flex justify={"center"} pt={6}>
                   <div className="Signup__OauthCont">
-                    <GoogleOAuthProvider clientId={clientID}>
-                      <Oauth />
-                    </GoogleOAuthProvider>
+                    {!loading ? (
+                      <GoogleOAuthProvider clientId={clientID}>
+                        <Oauth setLoading={setLoading} />
+                      </GoogleOAuthProvider>
+                    ) : (
+                      <Box>
+                        <Spinner />
+                      </Box>
+                    )}
                   </div>
                 </Flex>
                 <Stack pt={2}>
