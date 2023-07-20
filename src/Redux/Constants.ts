@@ -11,12 +11,27 @@ interface USER_LOGOUT_ACTION {
 
 type USER_AUTH_ACTION_PAYLOAD_TYPE = {
   token: string;
-  user: object | any;
+  user: any;
 };
+interface BOARD_UPDATE_ACTION_TYPE {
+  type: ActionTypes.BOARD_UPDATE;
+  payload: [] | [BoardsType];
+}
 
-export type Action = USER_AUTH_ACTION | USER_LOGOUT_ACTION;
+export type Action =
+  | USER_AUTH_ACTION
+  | USER_LOGOUT_ACTION
+  | BOARD_UPDATE_ACTION_TYPE;
 
-export type InitialStateType = {
+export interface InitialStateType {
   token: string;
-  user: object | string;
+  user: any;
+  boards: [] | [BoardsType];
+}
+
+type BoardsType = {
+  _id: string;
+  userID: string;
+  name: string;
+  tasks: [];
 };

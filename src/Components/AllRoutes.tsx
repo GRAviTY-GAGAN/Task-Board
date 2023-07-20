@@ -5,9 +5,16 @@ import Signin from "../Pages/Signin";
 import PrivateRoute from "../PrivateRoute";
 import Nav from "./Nav";
 
-const AllRoutes = () => {
+const AllRoutes = ({
+  colorMode,
+  toggleColorMode,
+}: {
+  colorMode: string;
+  toggleColorMode: () => void;
+}) => {
   return (
     <div>
+      <Nav colorMode={colorMode} toggleColorMode={toggleColorMode} />
       <Routes>
         <Route path="/" element={<Signup />} />
         <Route path="/signin" element={<Signin />} />
@@ -15,7 +22,6 @@ const AllRoutes = () => {
           path="/home"
           element={
             <PrivateRoute>
-              <Nav />
               <Home />
             </PrivateRoute>
           }

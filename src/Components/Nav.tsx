@@ -14,7 +14,7 @@ import {
   //   useDisclosure,
   useColorModeValue,
   Stack,
-  useColorMode,
+  //   useColorMode,
   Center,
 } from "@chakra-ui/react";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
@@ -22,6 +22,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ActionTypes } from "../Redux/action-types";
 import { Store } from "../Redux/store";
 import colorPic from "../assets/color-mix-pic.avif";
+import { useLocation } from "react-router-dom";
 
 const NavLink = ({ children }: { children: ReactNode }) => (
   <Link
@@ -38,14 +39,21 @@ const NavLink = ({ children }: { children: ReactNode }) => (
   </Link>
 );
 
-export default function Nav() {
-  const { colorMode, toggleColorMode } = useColorMode();
+export default function Nav({
+  colorMode,
+  toggleColorMode,
+}: {
+  colorMode: string;
+  toggleColorMode: () => void;
+}) {
+  //   const { colorMode, toggleColorMode } = useColorMode();
   //   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const user = useSelector((store: Store) => store.reducer.user);
   //   console.log(user.image);
 
   const dispatch = useDispatch();
+  const location = useLocation();
 
   function handleLogout() {
     localStorage.setItem("token", "");
@@ -58,6 +66,7 @@ export default function Nav() {
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <Box
             className="nav__TaskBoards"
+            cursor={"default"}
             backgroundImage={colorPic}
             backgroundSize={"cover"}
             backgroundPosition={"center"}
@@ -75,46 +84,50 @@ export default function Nav() {
                 {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
               </Button>
 
-              <Menu>
-                <MenuButton
-                  as={Button}
-                  rounded={"full"}
-                  variant={"link"}
-                  cursor={"pointer"}
-                  minW={0}
-                >
-                  <Avatar
-                    size={"sm"}
-                    src={
-                      user.image
-                        ? user.image
-                        : "https://avatars.dicebear.com/api/male/username.svg"
-                    }
-                  />
-                </MenuButton>
-                <MenuList alignItems={"center"}>
-                  <br />
-                  <Center>
+              {location.pathname !== "/" && location.pathname !== "/signin" ? (
+                <Menu>
+                  <MenuButton
+                    as={Button}
+                    rounded={"full"}
+                    variant={"link"}
+                    cursor={"pointer"}
+                    minW={0}
+                  >
                     <Avatar
-                      size={"2xl"}
+                      size={"sm"}
                       src={
                         user.image
                           ? user.image
                           : "https://avatars.dicebear.com/api/male/username.svg"
                       }
                     />
-                  </Center>
-                  <br />
-                  <Center>
-                    <p>{user.firstName + " " + user.lastName}</p>
-                  </Center>
-                  <br />
-                  <MenuDivider />
-                  {/* <MenuItem>Your Servers</MenuItem>
+                  </MenuButton>
+                  <MenuList alignItems={"center"}>
+                    <br />
+                    <Center>
+                      <Avatar
+                        size={"2xl"}
+                        src={
+                          user.image
+                            ? user.image
+                            : "https://avatars.dicebear.com/api/male/username.svg"
+                        }
+                      />
+                    </Center>
+                    <br />
+                    <Center>
+                      <p>{user.firstName + " " + user.lastName}</p>
+                    </Center>
+                    <br />
+                    <MenuDivider />
+                    {/* <MenuItem>Your Servers</MenuItem>
                   <MenuItem>Account Settings</MenuItem> */}
-                  <MenuItem onClick={handleLogout}>Logout</MenuItem>
-                </MenuList>
-              </Menu>
+                    <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                  </MenuList>
+                </Menu>
+              ) : (
+                ""
+              )}
             </Stack>
           </Flex>
         </Flex>

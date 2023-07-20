@@ -4,6 +4,7 @@ import { ActionTypes } from "./action-types";
 const initialState: InitialStateType = {
   token: localStorage.getItem("token") || "",
   user: "",
+  boards: [],
 };
 
 export function reducer(state = initialState, action: Action) {
@@ -21,6 +22,13 @@ export function reducer(state = initialState, action: Action) {
         ...state,
         token: "",
         user: "",
+      };
+    }
+
+    case ActionTypes.BOARD_UPDATE: {
+      return {
+        ...state,
+        boards: action.payload,
       };
     }
 

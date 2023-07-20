@@ -3,8 +3,9 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { ActionTypes } from "../Redux/action-types";
 import Sidebar from "../Components/Sidebar";
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Flex, useColorModeValue } from "@chakra-ui/react";
 import Board from "../Components/Board";
+import { fetchBoardsData } from "../Redux/action";
 
 const Home = () => {
   const url =
@@ -16,6 +17,7 @@ const Home = () => {
 
   useEffect(() => {
     fetchUserDetails();
+    fetchBoardsData();
   }, []);
 
   function fetchUserDetails() {
@@ -44,16 +46,16 @@ const Home = () => {
   }
 
   return (
-    <div>
+    <Box bg={useColorModeValue("white", "#0d1117")}>
       <Flex>
-        <Box>
+        <Box width={"20%"}>
           <Sidebar />
         </Box>
-        <Box>
+        <Box width={"80%"}>
           <Board />
         </Box>
       </Flex>
-    </div>
+    </Box>
   );
 };
 
