@@ -55,7 +55,7 @@ export default function AddBoardModal({
           }
         )
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           if (res.data.msg == "Board Created") {
             toast({
               title: "New Board Added.",

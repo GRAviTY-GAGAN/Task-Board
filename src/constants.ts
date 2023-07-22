@@ -7,3 +7,9 @@ export type UserObjType = {
   email: string;
   password: string | number;
 };
+
+export interface SubtaskObjType {
+  subTaskID: string;
+  task: string;
+  status: boolean;
+}

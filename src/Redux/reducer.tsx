@@ -5,6 +5,9 @@ const initialState: InitialStateType = {
   token: localStorage.getItem("token") || "",
   user: "",
   boards: [],
+  board: "",
+  tasks: [],
+  subTasks: [],
 };
 
 export function reducer(state = initialState, action: Action) {
@@ -29,6 +32,15 @@ export function reducer(state = initialState, action: Action) {
       return {
         ...state,
         boards: action.payload,
+      };
+    }
+
+    case ActionTypes.BOARD_TASKS_SUBTASKS: {
+      return {
+        ...state,
+        board: action.payload.board,
+        tasks: action.payload.tasks,
+        subTasks: action.payload.subTasks,
       };
     }
 

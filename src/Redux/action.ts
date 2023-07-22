@@ -3,6 +3,7 @@ import { ThunkDispatch } from "redux-thunk";
 import { Store } from "./store";
 import { Action } from "./Constants";
 import { ActionTypes } from "./action-types";
+import { useLocation } from "react-router-dom";
 
 const url =
   import.meta.env.MODE == "development"
@@ -19,9 +20,13 @@ export const fetchBoardsData =
         },
       })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         if (res.data.msg == "yes") {
-          dispatch({ type: ActionTypes.BOARD_UPDATE, payload: res.data.board });
+          dispatch({
+            type: ActionTypes.BOARD_UPDATE,
+            payload: res.data.boards,
+          });
+          // dispatch(fetchBoardAndTaskAndSubTask(id));
         } else {
           console.error(res, "SOmething wrong");
         }
@@ -29,4 +34,35 @@ export const fetchBoardsData =
       .catch((err) => {
         console.log(err);
       });
+  };
+
+export const fetchBoardAndTaskAndSubTask =
+  (id: string | null) => (dispatch: ThunkDispatch<Store, {}, Action>) => {
+    if (id) {
+      return axios
+        .get(`${url}/boards/newTasksFetch/${id}`)
+        .then((res) => {
+          console.log(res);
+          dispatch({
+            type: ActionTypes.BOARD_TASKS_SUBTASKS,
+            payload: {
+              board: res.data.board,
+              tasks: res.data.tasks,
+              subTasks: res.data.subTasks,
+            },
+          });
+          console.log(Date.now());
+        })
+        .catch((err) => {
+          console.log(err);
+          dispatch({
+            type: ActionTypes.BOARD_TASKS_SUBTASKS,
+            payload: {
+              board: "",
+              tasks: [],
+              subTasks: [],
+            },
+          });
+        });
+    }
   };

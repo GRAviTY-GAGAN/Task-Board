@@ -1,11 +1,12 @@
-import { useEffect } from "react";
+import { Dispatch, useEffect } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { ActionTypes } from "../Redux/action-types";
 import Sidebar from "../Components/Sidebar";
 import { Box, Flex, useColorModeValue } from "@chakra-ui/react";
 import Board from "../Components/Board";
-import { fetchBoardsData } from "../Redux/action";
+import { fetchBoardAndTaskAndSubTask, fetchBoardsData } from "../Redux/action";
+import { useLocation } from "react-router-dom";
 
 const Home = () => {
   const url =
@@ -13,11 +14,12 @@ const Home = () => {
       ? import.meta.env.VITE_LOCAL_URL
       : import.meta.env.VITE_PROD_URL;
 
-  const dispatch = useDispatch();
+  const loaction = useLocation();
+
+  const dispatch: Dispatch<any> = useDispatch();
 
   useEffect(() => {
     fetchUserDetails();
-    fetchBoardsData();
   }, []);
 
   function fetchUserDetails() {
@@ -38,6 +40,7 @@ const Home = () => {
               user: res.data.user,
             },
           });
+          dispatch(fetchBoardsData());
         }
       })
       .catch((err) => {

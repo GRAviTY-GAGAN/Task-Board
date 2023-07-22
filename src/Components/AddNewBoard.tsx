@@ -14,7 +14,8 @@ const AddNewBoard = () => {
     <Box padding={"1.5rem"}>
       <Button onClick={addBoardOnOpen} colorScheme="blue">
         <Flex align={"center"} gap={"0.5rem"}>
-          <AddIcon /> <Box>Add New Board</Box>
+          <AddIcon />
+          <Box>Add New Board</Box>
         </Flex>
       </Button>
       <AddBoardModal
