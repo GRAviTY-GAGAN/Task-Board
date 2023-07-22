@@ -1,8 +1,6 @@
 import { AddIcon } from "@chakra-ui/icons";
 import { Box, Button, Flex, useDisclosure } from "@chakra-ui/react";
 import AddTaskModal from "./AddTaskModal";
-import React from "react";
-
 const AddNewTask = () => {
   const {
     isOpen: addTaskIsOpen,

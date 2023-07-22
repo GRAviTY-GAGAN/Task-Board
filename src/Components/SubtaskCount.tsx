@@ -16,10 +16,10 @@ const SubtaskCount = ({ item, subTasks }: SubTaskCountPropsType) => {
   //   const [count, setCount] = useState(0);
 
   let countTrack = 0;
-  let ran = false;
+  //   let ran = false;
 
   for (let i = 0; i < item.subtask.length; i++) {
-    ran = true;
+    // ran = true;
     for (let j = 0; j < subTasks.length; j++) {
       if (item.subtask[i] == subTasks[j].subTaskID) {
         if (subTasks[j].status == false) {

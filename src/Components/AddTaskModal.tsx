@@ -14,7 +14,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import axios from "axios";
-import React, { Dispatch, useState, useEffect } from "react";
+import React, { Dispatch, useState } from "react";
 import { useDispatch } from "react-redux";
 import Subtasks from "./Subtasks";
 import { v4 as uuidv4 } from "uuid";
@@ -52,7 +52,6 @@ export default function AddTaskModal({
   const [title, setTitle] = useState("");
   const [description, setdescription] = useState("");
   const [status, setstatus] = useState("");
-  const [loading, setLoading] = useState(false);
 
   const dispatch: Dispatch<any> = useDispatch();
   const toast = useToast();

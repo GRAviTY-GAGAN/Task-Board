@@ -10,14 +10,12 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  useDisclosure,
   useToast,
 } from "@chakra-ui/react";
 import axios from "axios";
 import React, { Dispatch, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { fetchBoardsData } from "../Redux/action";
-import { Action } from "../Redux/Constants";
 
 interface AddBoardModalPropsTypes {
   addBoardIsOpen: boolean;
@@ -37,7 +35,6 @@ export default function AddBoardModal({
   const finalRef = React.useRef(null);
 
   const [name, setname] = useState("");
-  const [loading, setLoading] = useState(false);
   const dispatch: Dispatch<any> = useDispatch();
   const toast = useToast();
 

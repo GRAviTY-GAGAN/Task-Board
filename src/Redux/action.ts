@@ -3,7 +3,6 @@ import { ThunkDispatch } from "redux-thunk";
 import { Store } from "./store";
 import { Action } from "./Constants";
 import { ActionTypes } from "./action-types";
-import { useLocation } from "react-router-dom";
 
 const url =
   import.meta.env.MODE == "development"

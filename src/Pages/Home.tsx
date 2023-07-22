@@ -5,16 +5,13 @@ import { ActionTypes } from "../Redux/action-types";
 import Sidebar from "../Components/Sidebar";
 import { Box, Flex, useColorModeValue } from "@chakra-ui/react";
 import Board from "../Components/Board";
-import { fetchBoardAndTaskAndSubTask, fetchBoardsData } from "../Redux/action";
-import { useLocation } from "react-router-dom";
+import { fetchBoardsData } from "../Redux/action";
 
 const Home = () => {
   const url =
     import.meta.env.MODE == "development"
       ? import.meta.env.VITE_LOCAL_URL
       : import.meta.env.VITE_PROD_URL;
-
-  const loaction = useLocation();
 
   const dispatch: Dispatch<any> = useDispatch();
 

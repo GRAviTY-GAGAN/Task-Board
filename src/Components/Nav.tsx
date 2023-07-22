@@ -1,10 +1,9 @@
-import { ReactNode } from "react";
+// import { ReactNode } from "react";
 import "../CSS/Nav.css";
 import {
   Box,
   Flex,
   Avatar,
-  Link,
   Button,
   Menu,
   MenuButton,
@@ -24,20 +23,20 @@ import { Store } from "../Redux/store";
 import colorPic from "../assets/color-mix-pic.avif";
 import { useLocation } from "react-router-dom";
 
-const NavLink = ({ children }: { children: ReactNode }) => (
-  <Link
-    px={2}
-    py={1}
-    rounded={"md"}
-    _hover={{
-      textDecoration: "none",
-      bg: useColorModeValue("gray.200", "gray.700"),
-    }}
-    href={"#"}
-  >
-    {children}
-  </Link>
-);
+// const NavLink = ({ children }: { children: ReactNode }) => (
+//   <Link
+//     px={2}
+//     py={1}
+//     rounded={"md"}
+//     _hover={{
+//       textDecoration: "none",
+//       bg: useColorModeValue("gray.200", "gray.700"),
+//     }}
+//     href={"#"}
+//   >
+//     {children}
+//   </Link>
+// );
 
 export default function Nav({
   colorMode,

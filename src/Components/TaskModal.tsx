@@ -18,7 +18,7 @@ import {
 import React, { Dispatch } from "react";
 import { useDispatch } from "react-redux";
 import { fetchBoardAndTaskAndSubTask, fetchBoardsData } from "../Redux/action";
-import { Action, SubTaskType, TasksType } from "../Redux/Constants";
+import { SubTaskType } from "../Redux/Constants";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 
