@@ -41,7 +41,7 @@ export const fetchBoardAndTaskAndSubTask =
       return axios
         .get(`${url}/boards/newTasksFetch/${id}`)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           dispatch({
             type: ActionTypes.BOARD_TASKS_SUBTASKS,
             payload: {
@@ -50,7 +50,7 @@ export const fetchBoardAndTaskAndSubTask =
               subTasks: res.data.subTasks,
             },
           });
-          console.log(Date.now());
+          // console.log(Date.now());
         })
         .catch((err) => {
           console.log(err);

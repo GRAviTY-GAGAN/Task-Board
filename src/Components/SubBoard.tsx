@@ -59,7 +59,7 @@ const SubBoard = () => {
     axios
       .post(`${url}/boards/tasksAndSubTasks`, { taskSubTaskID })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setSubtasks(res.data.subTasks);
       })
       .catch((err) => {
@@ -107,7 +107,7 @@ const SubBoard = () => {
     axios
       .delete(`${url}/boards/taskDelete/${id}`)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         if (res.data.msg == "Success Deleted") {
           toast({
             title: "Task Deleted.",
@@ -155,7 +155,7 @@ const SubBoard = () => {
     } else {
       setTaskStatus(e.target.value);
     }
-    console.log(e.target.name == "description", e.target.name == "name");
+    // console.log(e.target.name == "description", e.target.name == "name");
   }
 
   return (

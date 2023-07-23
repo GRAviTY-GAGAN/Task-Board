@@ -53,7 +53,7 @@ const Signin = () => {
       axios
         .post(`${url}/user/login`, userObj)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           if (res.data.msg == "success") {
             localStorage.setItem("token", res.data.token);
             dispatch({

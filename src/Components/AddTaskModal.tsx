@@ -119,7 +119,7 @@ export default function AddTaskModal({
       axios
         .post(`${url}/boards/task`, { task: taskObj, subtasks: subtasks })
         .then((res) => {
-          console.log(res);
+          // console.log(res);
 
           if (res.data.msg == "Task Added") {
             toast({

@@ -7,19 +7,9 @@ interface SubTaskCountPropsType {
 }
 
 const SubtaskCount = ({ item, subTasks }: SubTaskCountPropsType) => {
-  console.log(item, subTasks, "HERE");
-
-  if (item.title == "Testing Tesk 1") {
-    console.log(item, subTasks, "YEs");
-  }
-
-  //   const [count, setCount] = useState(0);
-
   let countTrack = 0;
-  //   let ran = false;
 
   for (let i = 0; i < item.subtask.length; i++) {
-    // ran = true;
     for (let j = 0; j < subTasks.length; j++) {
       if (item.subtask[i] == subTasks[j].subTaskID) {
         if (subTasks[j].status == false) {

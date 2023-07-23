@@ -70,7 +70,7 @@ export default function TaskModal({
           status: taskStatus,
         })
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           if (res.data.msg == "Task updated") {
             toast({
               title: "Task Updated.",
@@ -119,7 +119,7 @@ export default function TaskModal({
     axios
       .patch(`${url}/boards/subtaskUpdate/${id}`, { status: !status })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         fetchTask();
         dispatch(fetchBoardsData());
         dispatch(fetchBoardAndTaskAndSubTask(location.search.split("=")[1]));
