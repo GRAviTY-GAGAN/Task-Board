@@ -118,7 +118,7 @@ export default function TaskModal({
   function handleSubtaskChange(id: string, status: boolean) {
     axios
       .patch(`${url}/boards/subtaskUpdate/${id}`, { status: !status })
-      .then((res) => {
+      .then(() => {
         // console.log(res);
         fetchTask();
         dispatch(fetchBoardsData());
