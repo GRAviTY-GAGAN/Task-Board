@@ -1,4 +1,4 @@
-import { Dispatch, useEffect, useState } from "react";
+import { Dispatch, useEffect } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { ActionTypes } from "../Redux/action-types";
@@ -22,7 +22,7 @@ const Home = ({
 
   const dispatch: Dispatch<any> = useDispatch();
 
-  const [active, setActive] = useState(false);
+  // const [active, setActive] = useState(false);
 
   useEffect(() => {
     fetchUserDetails();
