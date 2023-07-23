@@ -159,9 +159,19 @@ const SubBoard = () => {
   }
 
   return (
-    <Grid width={"100%"} gridTemplateColumns={"repeat(3,1fr)"} height={"100vh"}>
+    <Grid
+      width={"100%"}
+      gridTemplateColumns={{
+        base: "repeat(1,1fr)",
+        md: "repeat(2,1fr)",
+        lg: "repeat(3,1fr)",
+      }}
+      minHeight={"100vh"}
+    >
       <Box padding={"1rem"}>
-        <Box>Todo</Box>
+        <Box fontSize={"larger"} fontWeight={500}>
+          Todo
+        </Box>
         <Box>
           {todos.map((todo) => {
             return (
@@ -225,7 +235,9 @@ const SubBoard = () => {
         </Box>
       </Box>
       <Box padding={"1rem"}>
-        <Box>Doing</Box>
+        <Box fontSize={"larger"} fontWeight={500}>
+          Doing
+        </Box>
         <Box>
           {doing.map((item) => {
             return (
@@ -289,7 +301,9 @@ const SubBoard = () => {
         </Box>
       </Box>
       <Box padding={"1rem"}>
-        <Box>Done</Box>
+        <Box fontSize={"larger"} fontWeight={500}>
+          Done
+        </Box>
         <Box>
           {done.map((item) => {
             return (

@@ -10,7 +10,11 @@ const AddNewBoard = () => {
   } = useDisclosure();
 
   return (
-    <Box padding={"1.5rem"}>
+    <Box
+      display={"flex"}
+      justifyContent={"center"}
+      padding={{ base: "1rem", md: "1.5rem" }}
+    >
       <Button onClick={addBoardOnOpen} colorScheme="blue">
         <Flex align={"center"} gap={"0.5rem"}>
           <AddIcon />

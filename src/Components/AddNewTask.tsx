@@ -9,7 +9,11 @@ const AddNewTask = () => {
   } = useDisclosure();
 
   return (
-    <Box padding={"0 1.5rem 1.5rem 1.5rem"}>
+    <Box
+      display={"flex"}
+      justifyContent={"center"}
+      padding={{ base: "0 1rem 1rem 1rem", md: "0 1.5rem 1.5rem 1.5rem" }}
+    >
       <Flex>
         <Button onClick={addTaskOnOpen} minW={"170px"} colorScheme="blue">
           <Flex align={"center"} justify={"center"} gap={"0.5rem"}>

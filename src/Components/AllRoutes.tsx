@@ -8,9 +8,13 @@ import Nav from "./Nav";
 const AllRoutes = ({
   colorMode,
   toggleColorMode,
+  show,
+  setShow,
 }: {
   colorMode: string;
   toggleColorMode: () => void;
+  show: boolean;
+  setShow: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   return (
     <div>
@@ -22,7 +26,7 @@ const AllRoutes = ({
           path="/home"
           element={
             <PrivateRoute>
-              <Home />
+              <Home show={show} setShow={setShow} />
             </PrivateRoute>
           }
         />

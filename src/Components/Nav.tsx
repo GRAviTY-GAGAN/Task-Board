@@ -70,7 +70,7 @@ export default function Nav({
             backgroundSize={"cover"}
             backgroundPosition={"center"}
             backgroundClip={"text"}
-            fontSize={"3xl"}
+            fontSize={{ base: "larger", lg: "3xl" }}
             color={"transparent"}
             fontWeight={800}
           >

@@ -1,4 +1,4 @@
-import { Box, Flex, useColorModeValue } from "@chakra-ui/react";
+import { Box, CloseButton, Flex, useColorModeValue } from "@chakra-ui/react";
 import { Dispatch, useState, useEffect } from "react";
 import AddNewBoard from "./AddNewBoard";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,7 +10,11 @@ import { fetchBoardAndTaskAndSubTask, fetchBoardsData } from "../Redux/action";
 import AddNewTask from "./AddNewTask";
 import { useLocation, useSearchParams } from "react-router-dom";
 
-const Sidebar = () => {
+const Sidebar = ({
+  setShow,
+}: {
+  setShow: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const url =
     import.meta.env.MODE == "development"
       ? import.meta.env.VITE_LOCAL_URL
@@ -92,7 +96,19 @@ const Sidebar = () => {
   }
 
   return (
-    <Box bg={useColorModeValue("gray.50", "#21262d")} height={"100vh"}>
+    <Box
+      bg={useColorModeValue("gray.50", "#21262d")}
+      pt={"1px"}
+      height={"100vh"}
+    >
+      <Box
+        onClick={() => setShow((prev) => !prev)}
+        display={{ base: "flex", lg: "none" }}
+        justifyContent={"flex-end"}
+        m={"10px 0"}
+      >
+        <CloseButton />
+      </Box>
       {boards.length > 0 && (
         <Box minW={"200px"} maxH={"300px"}>
           {boards.map((board) => {
@@ -100,7 +116,10 @@ const Sidebar = () => {
               <Flex
                 bg={active == board._id ? "blue.700" : ""}
                 color={active == board._id ? "white" : ""}
-                onClick={() => handleChangeBoard(board._id)}
+                onClick={() => {
+                  setShow((prev) => !prev);
+                  handleChangeBoard(board._id);
+                }}
                 align={"center"}
                 justify={"space-between"}
                 padding={"1rem"}
